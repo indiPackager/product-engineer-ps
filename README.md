@@ -22,6 +22,15 @@ Choose **one** of the following focused problems. You are not expected to build 
 | Trustworthy long-term memory | Data modelling, provenance, retrieval, correction, and user control | [View problem 4](problems/04-trustworthy-memory/README.md) |
 | Reliable AI conversation runtime | Orchestration, streaming, safety gates, cancellation, and observability | [View problem 5](problems/05-reliable-conversation-runtime/README.md) |
 
+## Selected solution: Problem 3
+
+This fork implements **Durable Reminders and Follow-Ups** with a Node.js service, durable JSON storage, versioned edits, cancellation, IANA time-zone conversion, bounded retries, restart recovery, and idempotent local delivery.
+
+- [Read the completed submission](SUBMISSION.md)
+- Install and run: `npm install` then `npm run dev`
+- Run deterministic tests: `npm test`
+- Run the 20-item verification benchmark: `npm run benchmark`
+
 Read this page first, then read the complete brief for your selected problem. The problem-specific brief is the source of truth for its acceptance criteria.
 
 ## What this challenge is—and is not
