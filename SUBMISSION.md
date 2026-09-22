@@ -2,11 +2,11 @@
 
 ## Candidate
 
-- **Name:**
-- **Email:**
-- **GitHub:**
+- **Name: Ravi Katharotiya**
+- **Email: katharotiyaravi72@gmail.com**
+- **GitHub: https://github.com/indiPackager**
 - **Selected problem:** Problem 3: Durable Reminders and Follow-Ups
-- **Demo video:**
+- **Demo video: https://youtu.be/Ruw5KcMFW7U**
 
 ## Run the project
 
