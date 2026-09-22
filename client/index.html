@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f1eb" />
+    <title>Tempo | Durable reminders</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Tempo home">
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>
+            <strong>tempo</strong>
+            <small>durable reminders</small>
+          </span>
+        </a>
+        <div class="system-status"><span class="status-dot" id="status-dot"></span><span id="connection-label">Connecting</span><span class="status-divider"></span><span id="last-synced">Syncing...</span></div>
+      </header>
+
+      <main>
+        <section class="workspace" aria-label="Reminder management">
+          <aside class="composer-panel">
+            <div class="panel-heading">
+              <div><span class="section-number">01</span><h2>New reminder</h2></div>
+              <span class="panel-icon" aria-hidden="true">+</span>
+            </div>
+            <p class="panel-intro">Create a reminder with a precise local time. The worker will handle delivery automatically.</p>
+            <form id="reminder-form">
+              <label for="content">What should we remember?</label>
+              <textarea id="content" name="content" rows="3" placeholder="Call Sam about the launch..." required></textarea>
+              <div class="form-grid">
+                <div>
+                  <label for="local-time">Local time</label>
+                  <input id="local-time" name="localTime" type="datetime-local" required />
+                </div>
+                <div>
+                  <label for="time-zone">Time zone</label>
+                  <select id="time-zone" name="timeZone">
+                    <option value="UTC">UTC</option>
+                    <option value="Asia/Kolkata">Asia / Kolkata</option>
+                    <option value="America/New_York">America / New York</option>
+                    <option value="America/Los_Angeles">America / Los Angeles</option>
+                    <option value="Europe/London">Europe / London</option>
+                    <option value="Europe/Berlin">Europe / Berlin</option>
+                    <option value="Australia/Sydney">Australia / Sydney</option>
+                  </select>
+                </div>
+              </div>
+              <button class="primary-button" type="submit"><span>Create reminder</span><span aria-hidden="true">&#8594;</span></button>
+              <p class="form-feedback" id="form-feedback" role="status"></p>
+            </form>
+            <div class="trust-note"><span class="lock-icon" aria-hidden="true">&#9671;</span><span>Saved durably. Versioned edits and idempotent delivery included.</span></div>
+          </aside>
+
+          <section class="list-panel">
+            <div class="list-header">
+              <div class="panel-heading compact"><div><span class="section-number">02</span><h2>Reminder ledger</h2></div></div>
+              <button class="refresh-button" id="refresh-button" type="button" title="Refresh reminders"><span aria-hidden="true">&#8635;</span><span>Refresh</span></button>
+            </div>
+            <div class="toolbar">
+              <div class="search-wrap"><span aria-hidden="true">&#8981;</span><input id="search" type="search" placeholder="Search reminders" /></div>
+              <div class="filter-tabs" role="tablist" aria-label="Filter reminders">
+                <button class="filter-tab active" type="button" data-filter="all">All <span id="all-count">0</span></button>
+                <button class="filter-tab" type="button" data-filter="scheduled">Scheduled <span id="scheduled-count">0</span></button>
+                <button class="filter-tab" type="button" data-filter="delivered">Done <span id="delivered-count">0</span></button>
+              </div>
+            </div>
+            <div id="reminder-list" class="reminder-list" aria-live="polite"></div>
+          </section>
+        </section>
+
+      </main>
+
+      <footer><span>Tempo / durable workflow console</span><span>Background worker <i></i> Problem 03</span></footer>
+    </div>
+
+    <dialog id="edit-dialog" class="edit-dialog">
+      <form id="edit-form" method="dialog">
+        <div class="dialog-header"><div><span class="eyebrow">Edit reminder</span><h2>Change the promise</h2></div><button class="close-button" value="cancel" aria-label="Close">&times;</button></div>
+        <input id="edit-id" type="hidden" />
+        <label for="edit-content">Reminder text</label>
+        <textarea id="edit-content" rows="3" required></textarea>
+        <div class="form-grid"><div><label for="edit-time">Local time</label><input id="edit-time" type="datetime-local" required /></div><div><label for="edit-zone">Time zone</label><select id="edit-zone"><option value="UTC">UTC</option><option value="Asia/Kolkata">Asia / Kolkata</option><option value="America/New_York">America / New York</option><option value="Europe/London">Europe / London</option></select></div></div>
+        <div class="dialog-actions"><button class="secondary-button" value="cancel">Keep current</button><button class="primary-button" id="save-edit" value="default" type="submit">Save new version <span aria-hidden="true">&#8594;</span></button></div>
+      </form>
+    </dialog>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="script.js" defer></script>
+  </body>
+</html>

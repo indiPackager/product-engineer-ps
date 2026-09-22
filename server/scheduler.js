@@ -42,6 +42,10 @@ export class Scheduler {
     return this.storage.get(id);
   }
 
+  list() {
+    return this.storage.list();
+  }
+
   async edit(id, changes) {
     const current = this.get(id);
     if (!current || !activeStates.has(current.state)) return null;

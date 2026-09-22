@@ -1,0 +1,49 @@
+{
+  "reminders": {
+    "92d41319-fdb3-4eac-ba75-f5dc838dc38f": {
+      "id": "92d41319-fdb3-4eac-ba75-f5dc838dc38f",
+      "content": "Final integration check",
+      "localTime": "2099-01-01T09:00",
+      "timeZone": "UTC",
+      "dueAt": "2099-01-01T09:00:00.000Z",
+      "version": 2,
+      "state": "scheduled",
+      "attempts": [],
+      "deliveryKey": "92d41319-fdb3-4eac-ba75-f5dc838dc38f:2",
+      "nextAttemptAt": "2099-01-01T09:00:00.000Z"
+    },
+    "0955e3f5-3672-4a87-a7ee-ccd0e7eaebda": {
+      "id": "0955e3f5-3672-4a87-a7ee-ccd0e7eaebda",
+      "content": "test",
+      "localTime": "2026-09-22T13:53",
+      "timeZone": "UTC",
+      "dueAt": "2026-09-22T13:53:00.000Z",
+      "version": 1,
+      "state": "scheduled",
+      "attempts": [],
+      "deliveryKey": "0955e3f5-3672-4a87-a7ee-ccd0e7eaebda:1",
+      "nextAttemptAt": "2026-09-22T13:53:00.000Z"
+    },
+    "92191ae1-d2cf-44db-ae9e-666ad84c0d54": {
+      "id": "92191ae1-d2cf-44db-ae9e-666ad84c0d54",
+      "content": "second ext",
+      "localTime": "2026-09-22T13:53",
+      "timeZone": "Asia/Kolkata",
+      "dueAt": "2026-09-22T08:23:00.000Z",
+      "version": 1,
+      "state": "delivered",
+      "attempts": [
+        {
+          "number": 1,
+          "startedAt": "2026-09-22T08:23:19.611Z",
+          "finishedAt": "2026-09-22T08:23:19.612Z",
+          "outcome": "delivered"
+        }
+      ],
+      "deliveryKey": "92191ae1-d2cf-44db-ae9e-666ad84c0d54:1",
+      "nextAttemptAt": "2026-09-22T08:23:00.000Z",
+      "deliveredAt": "2026-09-22T08:23:19.612Z",
+      "destinationId": "04c4bbd5-236e-4dd3-8a19-401e3006bc80"
+    }
+  }
+}

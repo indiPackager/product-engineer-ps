@@ -1,8 +1,20 @@
 import express from "express";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export function createApp(scheduler) {
   const app = express();
   app.use(express.json());
+  const clientRoot = join(fileURLToPath(new URL("../client/", import.meta.url)));
+  app.use(express.static(clientRoot));
+
+  app.get("/api/reminders", (_request, response) => {
+    return response.json(scheduler.list());
+  });
+  
+  app.get("/api/health", (_request, response) => {
+    return response.json({ ok: true, workerRunning: scheduler.workerRunning });
+  });
 
   app.post("/api/reminders", async (request, response) => {
     try {

@@ -55,7 +55,7 @@ The running service uses the system clock. The tests and benchmark inject their 
 npm test
 ```
 
-The current test run passes all 7 tests with no failures.
+The current test run passes all 8 tests with no failures.
 
 ## Acceptance scenarios and verification
 
