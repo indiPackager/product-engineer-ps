@@ -13,6 +13,17 @@ const scheduler = new Scheduler({
 await scheduler.recover();
 const app = createApp(scheduler);
 const port = Number(process.env.PORT ?? 3000);
-app.listen(port, () =>
+const pollIntervalMs = Number(process.env.SCHEDULER_POLL_INTERVAL_MS ?? 1000);
+const server = app.listen(port, () =>
   console.log(`Durable reminders server running at http://localhost:${port}`),
 );
+scheduler.start(pollIntervalMs);
+
+async function shutdown(signal) {
+  console.log(`Received ${signal}; stopping scheduler`);
+  await scheduler.stop();
+  server.close(() => process.exit(0));
+}
+
+process.once("SIGINT", () => shutdown("SIGINT"));
+process.once("SIGTERM", () => shutdown("SIGTERM"));

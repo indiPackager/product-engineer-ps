@@ -43,6 +43,23 @@ test("discovers due work and delivers once", async () => {
   assert.equal(destination.notifications.length, 1);
 });
 
+test("background worker processes due work without a manual tick", async () => {
+  const { scheduler, destination, setNow } = await fixture();
+  const reminder = await scheduler.create({
+    content: "Run in the background",
+    localTime: "2025-01-01T01:00",
+    timeZone: "UTC",
+  });
+  setNow("2025-01-01T01:00:00Z");
+
+  scheduler.start(1);
+  await new Promise((resolve) => setTimeout(resolve, 20));
+  await scheduler.stop();
+
+  assert.equal(scheduler.get(reminder.id).state, "delivered");
+  assert.equal(destination.notifications.length, 1);
+});
+
 test("recovers a running reminder after restart", async () => {
   const first = await fixture();
   const reminder = await first.scheduler.create({

@@ -16,6 +16,9 @@ export class Scheduler {
     this.clock = clock;
     this.maxAttempts = maxAttempts;
     this.retryDelayMs = retryDelayMs;
+    this.workerTimer = null;
+    this.workerRunning = false;
+    this.pollPromise = null;
   }
 
   async create({ content, localTime, timeZone }) {
@@ -89,6 +92,33 @@ export class Scheduler {
       );
     for (const reminder of due)
       await this.execute(reminder.id, reminder.version);
+  }
+
+  start(intervalMs = 1000) {
+    if (this.workerRunning) return;
+    this.workerRunning = true;
+
+    const run = async () => {
+      if (!this.workerRunning) return;
+      this.pollPromise = this.poll();
+      try {
+        await this.pollPromise;
+      } catch (error) {
+        console.error("Scheduler poll failed:", error);
+      } finally {
+        this.pollPromise = null;
+      }
+      if (this.workerRunning) this.workerTimer = setTimeout(run, intervalMs);
+    };
+
+    this.workerTimer = setTimeout(run, 0);
+  }
+
+  async stop() {
+    this.workerRunning = false;
+    if (this.workerTimer) clearTimeout(this.workerTimer);
+    this.workerTimer = null;
+    if (this.pollPromise) await this.pollPromise;
   }
 
   async execute(id, expectedVersion = this.get(id)?.version) {
